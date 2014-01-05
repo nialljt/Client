@@ -48,6 +48,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 				if(MessagingClient.service.login(loginField.getText(), passwordField.getText())){
 					MessagingClient.service.unRegisterWithServerAndLogin(MessagingClient.clientObj, false,"");
 					MessagingClient.service.registerWithServer(MessagingClient.clientObj,true,"niall");
+					MessagingClient.loggedinUser = loginField.getText();
 					dispose();
 					SwingUtilities.invokeLater(new Runnable(){
 						public void run(){
@@ -59,6 +60,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 				}
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 		}else if(e.getSource() == cancelButton){

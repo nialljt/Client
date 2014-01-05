@@ -15,11 +15,14 @@ public class MessagingClient {
 	
 	public static MessagingInterface service;
 	public static ReturnInterfaceImpl clientObj;
+	public static String loggedinUser;
 private static Scanner kb;
 	
 	public static void main(String[] args) {
 		String registryURL = "rmi://192.168.1.73:1109/messaging"; 
-
+		
+		loggedinUser = "";
+		
 		kb = new Scanner(System.in);
 		
 		try{
@@ -30,6 +33,7 @@ private static Scanner kb;
 			service.unRegisterWithServerAndLogin(clientObj, false,"");
 			service.registerWithServer(clientObj,true,"niall");
 			}*/
+			
 		}catch(Exception e){
 			
 		}
@@ -40,7 +44,8 @@ private static Scanner kb;
 			}
 		};
 		SwingUtilities.invokeLater(CreateAndShowGUI);
-		System.out.println("enter yes");
+	
+		/*System.out.println("enter yes");
 		String answer = kb.nextLine();
 		while(!answer.equalsIgnoreCase("no")){
 		try {
@@ -52,7 +57,7 @@ private static Scanner kb;
 		}
 		System.out.println("enter yes");
 		answer = kb.nextLine();
-		}
+		}*/
 		
 	}
 

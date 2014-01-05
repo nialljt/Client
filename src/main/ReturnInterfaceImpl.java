@@ -4,6 +4,9 @@ import interfaces.ReturnInterface;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Vector;
+
+import mainFrame.MainFrame;
 
 public class ReturnInterfaceImpl extends UnicastRemoteObject implements ReturnInterface {
 
@@ -15,6 +18,18 @@ public class ReturnInterfaceImpl extends UnicastRemoteObject implements ReturnIn
 	public void recieveMessage(String message, String sender)
 			throws RemoteException {
 		System.out.println("Recived this: "+message+"From: "+sender); 
+		if (sender.contains("~~ALL~~")){
+		MainFrame.messages.append(sender.substring(0,sender.indexOf("~"))+": "+message+"\n");
+		}else{
+			
+		}
+		
+	}
+
+	@Override
+	public void updateOnlineList(Vector<String> whosOnline)
+			throws RemoteException {
+		// TODO Auto-generated method stub
 		
 	}
 
