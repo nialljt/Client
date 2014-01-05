@@ -47,7 +47,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 			try {
 				if(MessagingClient.service.login(loginField.getText(), passwordField.getText())){
 					MessagingClient.service.unRegisterWithServerAndLogin(MessagingClient.clientObj, false,"");
-					MessagingClient.service.registerWithServer(MessagingClient.clientObj,true,"niall");
+					MessagingClient.service.registerWithServer(MessagingClient.clientObj,true,loginField.getText());
 					MessagingClient.loggedinUser = loginField.getText();
 					dispose();
 					SwingUtilities.invokeLater(new Runnable(){

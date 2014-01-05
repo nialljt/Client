@@ -29,8 +29,10 @@ public class ReturnInterfaceImpl extends UnicastRemoteObject implements ReturnIn
 	@Override
 	public void updateOnlineList(Vector<String> whosOnline)
 			throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		MainFrame.usersOnline.clear();
+		for(int i = 0; i<whosOnline.size();i++){
+			MainFrame.usersOnline.add(whosOnline.elementAt(i));
+		}		
 	}
 
 }

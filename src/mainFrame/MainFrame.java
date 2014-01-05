@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
+import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -20,13 +21,13 @@ import main.MessagingClient;
 
 public class MainFrame extends JFrame implements ActionListener, WindowListener{
 
-	
+	public static Vector<String> usersOnline = new Vector<String>();
 	JPanel panel = new JPanel();
 	JPanel test = new JPanel();
 	static DefaultListModel model = new DefaultListModel();
 	
 	public static JTextArea messages = new JTextArea(5, 20);
-	public static JList online = new JList();
+	public static JList online = new JList(usersOnline);
 	JScrollPane messageScroller = new JScrollPane(messages);
 	JScrollPane listScroller = new JScrollPane(online);
 	public JButton send = new JButton("Send");
@@ -81,7 +82,7 @@ public class MainFrame extends JFrame implements ActionListener, WindowListener{
 				JOptionPane.showMessageDialog(null, "Enter some text","Error",JOptionPane.ERROR_MESSAGE);
 			}
 		}else if(e.getSource() == chat){
-			
+			String tmpuser = (String) online.getSelectedValue();
 		}
 	}
 
