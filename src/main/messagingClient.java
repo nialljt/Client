@@ -7,9 +7,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 
+import javax.swing.SwingUtilities;
+
+import loginFrame.LoginFrame;
+
 public class MessagingClient {
 	
-	private static MessagingInterface service;
+	public static MessagingInterface service;
+	public static ReturnInterfaceImpl clientObj;
 private static Scanner kb;
 	
 	public static void main(String[] args) {
@@ -19,15 +24,22 @@ private static Scanner kb;
 		
 		try{
 			service = (MessagingInterface)Naming.lookup(registryURL);
-			ReturnInterfaceImpl clientObj = new ReturnInterfaceImpl();
+			clientObj = new ReturnInterfaceImpl();
 			service.registerWithServer(clientObj, false, "");
-			if(service.login("niall", "test")){
+			/*if(service.login("niall", "test")){
 			service.unRegisterWithServerAndLogin(clientObj, false,"");
 			service.registerWithServer(clientObj,true,"niall");
-			}
+			}*/
 		}catch(Exception e){
 			
 		}
+		
+		Runnable CreateAndShowGUI = new Runnable(){
+			public void run(){
+				new LoginFrame();
+			}
+		};
+		SwingUtilities.invokeLater(CreateAndShowGUI);
 		System.out.println("enter yes");
 		String answer = kb.nextLine();
 		while(!answer.equalsIgnoreCase("no")){
