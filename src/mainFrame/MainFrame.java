@@ -16,14 +16,14 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
+import chatFrame.ChatFrame;
 import main.MessagingClient;
 
 
 public class MainFrame extends JFrame implements ActionListener, WindowListener{
 
 	public static Vector<String> usersOnline = new Vector<String>();
-	JPanel panel = new JPanel();
-	JPanel test = new JPanel();
+	
 	static DefaultListModel model = new DefaultListModel();
 	
 	public static JTextArea messages = new JTextArea(5, 20);
@@ -41,7 +41,7 @@ public class MainFrame extends JFrame implements ActionListener, WindowListener{
 		setLayout(null);
 		setTitle("Logged in as: "+MessagingClient.loggedinUser);
 		
-		reply.addActionListener(this);
+		chat.addActionListener(this);
 		send.addActionListener(this);
 		messages.setEditable(false);
 		online.setBorder(BorderFactory.createTitledBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED), "Online"));
@@ -73,6 +73,7 @@ public class MainFrame extends JFrame implements ActionListener, WindowListener{
 			if(!reply.getText().equals("")){
 				try {
 					MessagingClient.service.createMessage("ALL", reply.getText(), MessagingClient.loggedinUser);
+					messages.append("Me: "+reply.getText());
 					reply.setText("");
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
@@ -82,7 +83,12 @@ public class MainFrame extends JFrame implements ActionListener, WindowListener{
 				JOptionPane.showMessageDialog(null, "Enter some text","Error",JOptionPane.ERROR_MESSAGE);
 			}
 		}else if(e.getSource() == chat){
-			String tmpuser = (String) online.getSelectedValue();
+			final String tmpuser = (String) online.getSelectedValue();
+			SwingUtilities.invokeLater(new Runnable(){
+				public void run(){
+					new ChatFrame(tmpuser);
+				}
+			});
 		}
 	}
 
@@ -103,9 +109,9 @@ public class MainFrame extends JFrame implements ActionListener, WindowListener{
 		System.out.println("here1");
 		try {
 			System.out.println("here2");
-			MessagingClient.service.unRegisterWithServerAndLogin(MessagingClient.clientObj, true,MessagingClient.loggedinUser);
+			MessagingClient.service.newUnregisterWithServer(MessagingClient.loggedinUser);
+			System.out.println("Here 3");
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

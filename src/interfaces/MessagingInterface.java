@@ -14,7 +14,9 @@ public interface MessagingInterface extends Remote{
 	public void printQue() throws RemoteException;
 	
 	
-	public void registerWithServer(ReturnInterface clientObj, boolean login, String user) throws RemoteException;
-	public void unRegisterWithServerAndLogin(ReturnInterface clientObj, boolean logOut, String user) throws RemoteException;
+	public void tmpRegisterWithServer(ReturnInterface clientObj) throws RemoteException;
+	public void tmpunRegisterWithServer(ReturnInterface clientObj) throws RemoteException;
 	
+	public void newRegisterWithServer(ReturnInterface clientObj, String user) throws RemoteException;
+	public void newUnregisterWithServer(String user) throws RemoteException;
 }

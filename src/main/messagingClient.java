@@ -28,7 +28,7 @@ private static Scanner kb;
 		try{
 			service = (MessagingInterface)Naming.lookup(registryURL);
 			clientObj = new ReturnInterfaceImpl();
-			service.registerWithServer(clientObj, false, "");
+			service.tmpRegisterWithServer(clientObj);
 			/*if(service.login("niall", "test")){
 			service.unRegisterWithServerAndLogin(clientObj, false,"");
 			service.registerWithServer(clientObj,true,"niall");
